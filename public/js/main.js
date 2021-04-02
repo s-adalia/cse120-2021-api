@@ -39,7 +39,7 @@ function deleteData(id) {
 
     $.ajax({
         type: 'POST',
-        url: "https://cse120-2021-api-samantha.herokuapp.com/data/delete",
+        url: "https://cse-120-2021-api-samantha.herokuapp.com/data/delete",
         data: tmp,
         cache: false,
         dataType : 'json',
@@ -63,7 +63,7 @@ function saveData() {
 
     $.ajax({
         type: 'POST',
-        url: "https://cse120-2021-api-samantha.herokuapp.com/data",
+        url: "https://cse-120-2021-api-samantha.herokuapp.com/data",
         data: tmp,
         cache: false,
         dataType : 'json',
@@ -82,7 +82,7 @@ function saveData() {
 function loadExistingData() {
     $.ajax({
         type : "GET",
-        url : "https://cse120-2021-api-samantha.herokuapp.com/data",
+        url : "https://cse-120-2021-api-samantha.herokuapp.com/data",
         dataType : "json",
         success : function(data) {
         	console.log("success", data);
