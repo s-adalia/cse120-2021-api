@@ -1,30 +1,46 @@
-
 var loadedData = [];
 
-function loadEditItem() {
-    localStorage = window.localStorage;
-    editItem = JSON.parse(localStorage.getItem("editItem"));
-    console.log(editItem);
-    document.getElementById("_id").innerHTML = editItem["_id"];
-    document.getElementById("title").value = editItem["title"];
-    document.getElementById("fullname").value = editItem["fullName"];   
-    document.getElementById("author").value = editItem["author"];   
-    document.getElementById("pages").value = editItem["noOfPgs"];
+function loadEditBookItem() {
+  localStorage = window.localStorage;
+  editItem = JSON.parse(localStorage.getItem('editItem'));
+  console.log(editItem);
+  document.getElementById("_id").value = editItem["_id"];
+  
+  document.getElementById("fname").value = editItem["fullName"];   
+  document.getElementById("title").value = editItem["title"];
+  document.getElementById("author").value = editItem["author"];   
+  document.getElementById("publisher").value = editItem["publisher"];   
+  document.getElementById("publishingdate").value = editItem["publishingDate"]; 
+  /*
+  document.getElementById("language").value = editItem["language"]; 
+  document.getElementById("customLanguage").value = editItem["customLanguage"]; 
+  document.getElementById("type-of-cover").value = editItem["coverType"]; */
+  document.getElementById("num-of-pgs").value = editItem["noOfPgs"];
+  document.getElementById("genre").value = editItem["genre"]; 
+  document.getElementById("reason").value = editItem["reason"]; 
+    
+    
 }
 
 function editData(id) {
-    var tmp = id.split("edit_");
-    var item_id = tmp[1];
+  var tmp = id.split("edit_");
+  var item_id = tmp[1];
 
-    loadedData.forEach(item => {
-        if (item._id == item_id) {
-            console.log(item); 
-            localStorage = window.localStorage;
-            localStorage.setItem('editItem', JSON.stringify(item));
-            document.location  = "form.html"; 
-        }
-    })
+  loadedData.forEach(item => {
+      if ( item._id == item_id) {
+          console.log(item); 
+          localStorage = window.localStorage;
+          localStorage.setItem('editItem', JSON.stringify(item));
+          if (item["project"] == "Favorite Books"|| (item["projectName"] == "Favorite Books")) {
+          document.location  = "edit_books.html"; 
+          } else {
+          document.location  = "edit_music.html"; 
+          }
+      }
+  })
 }
+
+
 
 function deleteData(id) {
 
@@ -39,7 +55,7 @@ function deleteData(id) {
 
     $.ajax({
         type: 'POST',
-        url: "/data/delete",
+        url: "https://cse-120-2021-api-samantha.herokuapp.com/data/delete",
         data: tmp,
         cache: false,
         dataType : 'json',
@@ -63,7 +79,7 @@ function saveData() {
 
     $.ajax({
         type: 'POST',
-        url: "/data",
+        url: "https://cse-120-2021-api-samantha.herokuapp.com/data",
         data: tmp,
         cache: false,
         dataType : 'json',
@@ -79,24 +95,41 @@ function saveData() {
     });
 }
 
+
+//new
 function loadExistingData() {
-    $.ajax({
-        type : "GET",
-        url : "/data",
-        dataType : "json",
-        success : function(data) {
-        	console.log("success", data);
-            displayData(data.data);
-        },
-        error : function(data) {
-            console.log("Error")
-        }
-    });
+  myMusicHobbyData = [];
+  myBookData = [];
+  otherData = [];
+  $.ajax({
+      type : "GET",
+      url : "https://cse-120-2021-api-samantha.herokuapp.com/data",
+      dataType : "json",
+      success : function(data) {
+        loadedData = data.data;
+        data.data.forEach(elem => {
+          if (elem["owner"] == "Samantha Isabella Adalia") {
+            if (elem["project"] == "Survey: Music Hobby") {
+              myMusicHobbyData.push(elem);
+            } else {
+              myBookData.push(elem);
+            }
+          } else {
+            otherData.push(elem);
+          }
+        })
+        displayData(myMusicHobbyData, "musicDataContainer");
+        displayData(myBookData, "bookDataContainer");
+        displayData(otherData, "otherDataContainer");
+      },
+      error : function(data) {
+          console.log("Error")
+      }
+  });
 }
 
-function displayData(data) {
-    loadedData = data;
-    document.getElementById("dataContainer").innerHTML = "";
+function displayData(data, containerDivName) {
+    document.getElementById(containerDivName).innerHTML = "";
     data.forEach(elem => {
         var item = document.createElement("div");
         item.id = "div" + elem["_id"];
@@ -129,23 +162,31 @@ function displayData(data) {
                 item.appendChild(br);
             }
         })
-        var edit_button = document.createElement("button");
-        edit_button.innerHTML = "Edit";
-        edit_button.id = "edit_" + elem["_id"];
-        edit_button.className = "edit";
-        edit_button.addEventListener("click", function(e){
-            editData(e.target.id);
-        }, false);
-        item.appendChild(edit_button);
 
-        var button = document.createElement("button");
-        button.innerHTML = "Delete";
-        button.id = elem["_id"];
-        button.addEventListener("click", function(e){
-            deleteData(e.target.id);
-        }, false);
-        item.appendChild(button);
-        document.getElementById("dataContainer").appendChild(item);
+        if (elem["owner"] == "Samantha Isabella Adalia") {
+          var button2 = document.createElement("button");
+          button2.innerHTML = "Edit";
+          button2.className = "editButton";
+          button2.id = "edit_"+ elem["_id"];
+          button2.addEventListener("click", function(e){
+          editData(e.target.id);
+          }, false);
+          item.appendChild(button2);
+          
+        }
+
+        if (elem["owner"] == "Samantha Isabella Adalia" || (elem["fullName"] && elem["fullName"].indexOf("Sam") > -1)) {
+          var button = document.createElement("button");
+          button.innerHTML = "Delete";
+          button.id = elem["_id"];
+          button.addEventListener("click", function(e){
+          deleteData(e.target.id);
+          }, false);
+          item.appendChild(button);
+         }
+         document.getElementById(containerDivName).appendChild(item);
+     
     })
+    
 
 }
