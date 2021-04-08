@@ -7,7 +7,6 @@ const { MongoClient } = require("mongodb");
 const ObjectId = require('mongodb').ObjectId; 
 
 const uri =
- 
   "mongodb+srv://samantha-admin:R@m1M@lek777$@cluster0.ng69g.mongodb.net/cse120-2021-db?retryWrites=true&w=majority";
 
 const client = new MongoClient(uri);
@@ -62,6 +61,12 @@ app.post('/data', function (req, res) {
       .catch(error => console.error(error))
   })
   .catch(console.error)
+})
+
+app.post('/data/update', function (req, res) {
+   //ToDo: Please replace this with Edit/Update code
+  collection.update(criteria, update[[, multi], callback]);
+  
 })
 
 app.post('/data/delete', function (req, res) {
