@@ -96,13 +96,15 @@ function saveData() {
 }
 
 //UPDATE!
+
+
 function updateData(e) {
   e.preventDefault();
   var updatedBook = {};
   updatedBook.id = document.getElementById("_id").value;
   updatedBook.fullName = document.getElementById("fname").value;
   updatedBook.title = document.getElementById("title").value;
-    console.log(myBook);
+ 
       $.ajax({
       type: 'POST',
       url: "https://cse-120-2021-api-samantha.herokuapp.com/data/update",
