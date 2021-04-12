@@ -95,6 +95,36 @@ function saveData() {
     });
 }
 
+//UPDATE!
+function updateData(e) {
+  e.preventDefault();
+  var updatedBook = {};
+  updatedBook.id = document.getElementById("_id").value;
+  updatedBook.fullName = document.getElementById("fname").value;
+  updatedBook.title = document.getElementById("titlebook").value;
+  if(validateFormData() == false){
+    return;
+  }else{
+    console.log(myBook);
+
+      $.ajax({
+      type: 'POST',
+      url: "https://cse-120-2021-api-samantha.herokuapp.com/data/update",
+      data: updatedBook,
+      cache: false,
+      dataType : 'json',
+      success: function (data) {
+        console.log("success");
+      },
+      error: function (xhr) {
+        console.error("Error in post", xhr);
+      },
+      complete: function () {
+        console.log("Complete");  
+      }
+    });
+  }
+}
 
 //new
 function loadExistingData() {
