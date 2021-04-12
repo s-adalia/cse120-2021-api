@@ -121,7 +121,6 @@ function updateData(e) {
         console.log("Complete");  
       }
     });
-  }
 }
 
 //new
