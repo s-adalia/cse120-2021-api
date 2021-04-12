@@ -101,7 +101,7 @@ function updateData(e) {
   var updatedBook = {};
   updatedBook.id = document.getElementById("_id").value;
   updatedBook.fullName = document.getElementById("fname").value;
-  updatedBook.title = document.getElementById("titlebook").value;
+  updatedBook.title = document.getElementById("title").value;
   if(validateFormData() == false){
     return;
   }else{
