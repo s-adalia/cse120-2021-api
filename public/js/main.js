@@ -120,37 +120,7 @@ function updateData(e) {
       }
     });
 }
-//old
 
-function updateData(e) {
-  e.preventDefault();
-  var updatedBook = {};
-  updatedBook.id = document.getElementById("_idBook").value;
-  updatedBook.fullname = document.getElementById("fullnameBook").value;
-  updatedBook.title = document.getElementById("titleBook").value;
-  if(validateFormData() == false){
-    return;
-  }else{
-    console.log(myBook);
-
-      $.ajax({
-      type: 'POST',
-      url: "https://cse120-2021-api-yervand.herokuapp.com/data/update",
-      data: updatedBook,
-      cache: false,
-      dataType : 'json',
-      success: function (data) {
-        console.log("success");
-      },
-      error: function (xhr) {
-        console.error("Error in post", xhr);
-      },
-      complete: function () {
-        console.log("Complete");  
-      }
-    });
-  }
-}
 
 //new
 function loadExistingData() {
