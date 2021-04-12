@@ -102,9 +102,7 @@ function updateData(e) {
   updatedBook.id = document.getElementById("_id").value;
   updatedBook.fullName = document.getElementById("fname").value;
   updatedBook.title = document.getElementById("title").value;
-  if(validateFormData() == false){
-    return;
-  }else{
+  
     console.log(myBook);
 
       $.ajax({
