@@ -104,7 +104,12 @@ function updateData(e) {
   updatedBook.id = document.getElementById("_id").value;
   updatedBook.fullName = document.getElementById("fname").value;
   updatedBook.title = document.getElementById("title").value;
- 
+  updatedBook.author = document.getElementById("author").value;  
+  updatedBook.publisher = document.getElementById("publisher").value;
+  updatedBook.publishingDate = document.getElementById("publishingdate").value;
+  updatedBook.noOfPgs = document.getElementById("num-of-pgs").value;
+  updatedBook.genre = document.getElementById("genre").value;
+  updatedBook.reason = document.getElementById("reason").value;
       $.ajax({
       type: 'POST',
       url: "https://cse-120-2021-api-samantha.herokuapp.com/data/update",
