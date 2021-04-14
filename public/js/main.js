@@ -1,3 +1,112 @@
+console.log("It's working so far.")
+
+var myBook = {
+  "owner" : "Samantha Isabella Adalia",
+  "project" : "Favorite Books",
+  "fullName" :  "",
+  "title" : "",
+  "author" : "",
+  "publisher" : "",
+  "publishingDate" : "",
+  "language" : "",
+  "customLanguage" : "",
+  "coverType" : "",
+  "customCover" : "",
+  "noOfPgs" : "",
+  "genre" : "",
+  "reason" : ""
+}
+
+function handleFullNameChange() {
+  myBook.fullName = document.getElementById ("fname").value;
+}
+
+function handleTitleChange() {
+  myBook.title = document.getElementById ("title").value;
+}
+
+function handleAuthorChange() {
+  myBook.author = document.getElementById ("author").value;
+}
+
+function handlePublisherChange() {
+  myBook.publisher = document.getElementById ("publisher").value;
+}
+
+function handlePublishDateChange() {
+  myBook.publishingDate = document.getElementById ("publishingdate").value;
+}
+
+function handleLangChange(e) {
+  myBook.language = e.target.value;
+  if (myBook.language != "other") {
+    myBook.customLanguage = ""; document.getElementById("customlanguage").style.display = "none";
+  } else {document.getElementById("customlanguage").style.display = "block";
+  myBook.customLanguage = document.getElementById("customlanguage").value
+  }
+}
+
+
+function handleCustomLangChange() {
+  if (myBook.language == "other") {
+    myBook.customLanguage = document.getElementById("customlanguage").value;
+  }
+
+}
+
+function handleCoverChange(e) {
+  myBook.coverType = e.target.value;
+  if (myBook.coverType != "other2") {
+    myBook.customCover = ""; document.getElementById ("customcover").style.display = "none";
+  } else {document.getElementById("customcover").style.display = "block";
+  myBook.customCover = document.getElementById("customcover").value
+  }
+}
+
+function handleCustomCoverChange () {
+  if (myBook.coverType == "other2") {
+    myBook.customCover = document.getElementById ("customcover").value;
+  }
+}
+
+function handleNoOfPages() {
+  myBook.noOfPgs = document.getElementById ("num-of-pgs").value;
+}
+
+function handleGenreChange () {
+  myBook.genre = document.getElementById ("genre").value;
+}
+
+function handleReasonChange () {
+  myBook.reason = document.getElementById ("reason").value;
+}
+
+function submitTheBookData(e) {
+  e.preventDefault();
+  console.log("The current value is", myBook)
+  $.ajax({
+    type: 'POST',
+    url: "https://cse-120-2021-api-samantha.herokuapp.com/data",
+    data: myBook,
+    cache: false,
+    dataType : 'json',
+    success: function (data) {
+      console.log("success");
+    },
+    error: function (xhr) {
+      console.error("Error in post", xhr);
+    },
+    complete: function () {
+      console.log("Complete");  
+    }
+  });
+}
+
+//submit above
+
+
+
+//new March 20:
 var loadedData = [];
 
 function loadEditBookItem() {
@@ -11,10 +120,13 @@ function loadEditBookItem() {
   document.getElementById("author").value = editItem["author"];   
   document.getElementById("publisher").value = editItem["publisher"];   
   document.getElementById("publishingdate").value = editItem["publishingDate"]; 
-  /*
+  
   document.getElementById("language").value = editItem["language"]; 
-  document.getElementById("customLanguage").value = editItem["customLanguage"]; 
-  document.getElementById("type-of-cover").value = editItem["coverType"]; */
+  
+  document.getElementById("customlanguage").value = editItem["customLanguage"]; 
+  document.getElementById("cover").value = editItem["coverType"]; 
+  document.getElementById("customcover").value = editItem["customCover"]; 
+
   document.getElementById("num-of-pgs").value = editItem["noOfPgs"];
   document.getElementById("genre").value = editItem["genre"]; 
   document.getElementById("reason").value = editItem["reason"]; 
@@ -72,6 +184,10 @@ function deleteData(id) {
     });
 }
 
+
+
+
+
 function saveData() {
 	var tmp = {
 		"test": "Data"
@@ -95,9 +211,6 @@ function saveData() {
     });
 }
 
-//UPDATE!
-
-
 function updateData(e) {
   e.preventDefault();
   var updatedBook = {};
@@ -107,6 +220,11 @@ function updateData(e) {
   updatedBook.author = document.getElementById("author").value;  
   updatedBook.publisher = document.getElementById("publisher").value;
   updatedBook.publishingDate = document.getElementById("publishingdate").value;
+  //look
+  updatedBook.language = document.getElementById("language").value;
+  updatedBook.customLanguage = document.getElementById("customlanguage").value;
+  updatedBook.coverType = document.getElementById("cover").value;
+  updatedBook.customCover = document.getElementById("customcover").value;
   updatedBook.noOfPgs = document.getElementById("num-of-pgs").value;
   updatedBook.genre = document.getElementById("genre").value;
   updatedBook.reason = document.getElementById("reason").value;
@@ -128,12 +246,10 @@ function updateData(e) {
     });
 }
 
-
 //new
 function loadExistingData() {
   myMusicHobbyData = [];
   myBookData = [];
-  otherData = [];
   $.ajax({
       type : "GET",
       url : "https://cse-120-2021-api-samantha.herokuapp.com/data",
@@ -147,13 +263,10 @@ function loadExistingData() {
             } else {
               myBookData.push(elem);
             }
-          } else {
-            otherData.push(elem);
-          }
+            }
         })
         displayData(myMusicHobbyData, "musicDataContainer");
         displayData(myBookData, "bookDataContainer");
-        displayData(otherData, "otherDataContainer");
       },
       error : function(data) {
           console.log("Error")
@@ -223,3 +336,100 @@ function displayData(data, containerDivName) {
     
 
 }
+
+
+//GitHub from Yervand
+
+/* const express = require('express');
+const bodyParser  = require('body-parser');
+const port = process.env.PORT || 3001;
+const app = express();
+const cors = require('cors');
+const { MongoClient } = require("mongodb");
+const ObjectId = require('mongodb').ObjectId; 
+
+const uri =
+  "mongodb+srv://samantha-admin:R@m1M@lek777$@cluster0.ng69g.mongodb.net/cse120-2021-db?retryWrites=true&w=majority";
+
+const client = new MongoClient(uri);
+
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(express.static('public'));
+app.use(cors())
+
+app.use(function (req, res, next) {
+    res.header('Cache-Control',
+               'private, no-cache, no-store, must-revalidate');
+    res.header('Expires', '-1');
+    res.header('Pragma', 'no-cache');
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods',
+                  'GET, POST, DELETE, OPTIONS');
+    res.setHeader('Access-Control-Max-Age', '30000');
+    res.setHeader('Access-Control-Allow-Headers',
+                  'Content-Type, Authorization, X-Requested-With');
+    next();
+});  
+
+app.get('/', function (req, res) {
+  res.render('index', {});
+})
+
+app.post('/', function (req, res) {
+  res.send({"message":"Sent"});
+})
+
+app.get('/data', function (req, res) {
+  client.connect()
+  .then(client => {
+    client.db('cse120-2021-db').collection('books').find().toArray()
+      .then(results => {
+        console.log(results)
+        res.send({"data":results});
+      })
+      .catch(error => console.error(error))
+  })
+  .catch(console.error)
+})
+
+app.post('/data', function (req, res) {
+  client.connect()
+  .then(client => {
+    client.db('cse120-2021-db').collection('books').insertOne(req.body)
+      .then(result => {
+        console.log(result)
+        res.send({"message":"Added"});
+      })
+      .catch(error => console.error(error))
+  })
+  .catch(console.error)
+})
+
+app.post('/data/update', function (req, res) {
+   //ToDo: Please replace this with Edit/Update code
+  collection.update(criteria, update[[, options], callback]);
+
+})
+
+app.post('/data/delete', function (req, res) {
+  client.connect()
+  .then(client => {
+    let id = req.body.id;
+    const query = { "_id": ObjectId(id)};
+    client.db('cse120-2021-db').collection('books').deleteOne(query)
+      .then(result => {
+        console.log(result.deletedCount)
+        res.send({"deleted":result.deletedCount});
+      })
+      .catch(error => console.error(error))
+  })
+  .catch(console.error)
+})
+
+app.listen(port, function () {
+    console.log('Example app listening on port 3001!')
+})
+
+app.get('*', function(req, res) {
+        res.status(404).send('Bad/Default Route.');
+}); */
