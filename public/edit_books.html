@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title>Edit Your Book Form Entry</title>
+		<title>Edit Here!!</title>
 		<link rel="stylesheet" type="text/css" href="form.css">
     <link rel="shortcut icon" href="https://cdn001.tintin.com/public/tintin/img/shared/header/logo-tintin-240.png">
 		<script type="text/javascript" src="js/main.js"></script>
@@ -13,7 +13,7 @@
 	</head>
   
 	<body onload="loadEditBookItem()">
-		<label><h3>Edit your form:</h3></label>
+		<label><h3>Edit your form here:</h3></label>
 		<span id="_id"></span>
 		<label>Your name:</label><br>
 		<input type="text" id="fname"><br><br>
@@ -23,24 +23,21 @@
 		<input type="text" id="author"><br><br>
 		<label>Publisher:</label><br>
 		<input type="text" id="publisher"><br><br>
-    <label>Date published (year only):</label><br>
+    	<label>Date published (year only):</label><br>
 		<input type="number" id="publishingdate" min="1" max="2077"><br><br>
-
 		<label>Language (please type correct spelling):</label><br>
 		<input type="text" id="language"><br><br>
-    <label>Custom Language (please type the correct spelling):</label><br>
+    	<label>Custom Language (please type the correct spelling):</label><br>
 		<input type="text" id="customlanguage"><br><br>
-    <label>Cover (please type the correct spelling):</label><br>
+    	<label>Cover (please type the correct spelling):</label><br>
 		<input type="text" id="cover"><br><br>
-    <label>Custom Cover (please type the correct spelling):</label><br>
+    	<label>Custom Cover (please type the correct spelling):</label><br>
 		<input type="text" id="customcover"><br><br>
-
-
 		<label>Number of pages:</label><br>
 		<input type="number" id="num-of-pgs" min="1" max="2000"><br><br>
-    <label>Genre:</label><br>
+    	<label>Genre:</label><br>
 		<input type="text" id="genre"><br><br>
-    <label>Why is this your favorite book?</label><br>
+    	<label>Why is this your favorite book?</label><br>
 		<textarea id="reason" rows="4" cols="50"></textarea><br><br>
 
     <button type = "submit" onclick="updateData(event)">Submit</button>
