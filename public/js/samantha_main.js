@@ -313,6 +313,7 @@ function handleDreamArtistChange () {
 }
 
 /*____________________________________________SERVER & ADMIN PART____________________________________________*/
+
 var loadedData = [];
 
 function loadEditBookItem() {
