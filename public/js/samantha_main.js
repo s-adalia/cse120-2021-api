@@ -102,11 +102,217 @@ function submitTheBookData(e) {
   });
 }
 
-//submit above
+/*____________________________________________MUSIC PART (thanks Yervand for your formatting ideas)____________________________________________ */
 
 
+var requiredFields = [
+  "name", "gender", "age"
+]
 
-//new March 20:
+var myHobby = {
+  "owner" : "Samantha Isabella Adalia",
+  "project" : "Survey: Music Hobby",
+  "fullName" : "",
+  "gender" : "",
+  "age" : "",
+  "country" : "",
+  "occupation" : "",
+  "major" : "",
+  "instrumentslist" : "",
+  "customInstrument": "",
+  "ownInstruments" : "",
+  "firstInstrument" : "",
+  "yearsInstrument" : "",
+  "musicClasses" : "",
+  "howToVideos" : "",
+  "practice" : "",
+  "performance" : "",
+  "songwriting" : "",
+  "family" : "",
+  "top3Artists" : "",
+  "genre" : "",
+  "earworm" : "",
+  "listenHours" : "",
+  "provider" : "",
+  "albums" : "",
+  "memorableConcert" : "",
+  "dreamConcert" : "",
+  "dreamArtist" : "",
+}
+
+function handleNameChange() {
+  myHobby.name = document.getElementById ("name").value;
+}
+
+function handleGenderChange(e) {
+  myHobby.gender = e.target.value;
+}
+//onchange
+
+function handleAgeChange(e) {
+  myHobby.age = e.target.value;
+}
+//onchange
+
+function handleCountryChange(e) {
+  myHobby.country = e.target.value;
+}
+//dropdown
+
+function handleOccupationChange() {
+  myHobby.occupation = document.getElementById ("occupation").value;
+}
+
+function handleMajorChange(e) {
+  myHobby.major = e.target.value;
+}
+//dropdown
+
+function handleInstrumentsChange(e) {
+  var value = e.target.value;
+  if (e.target.checked == true) {
+    myHobby.instrumentslist = myHobby.instrumentslist + "," + value;
+  }
+  /*if (myHobby.instrumentslist != "other") {
+    myHobby.customInstrument = ""; document.getElementById("customInstrument").style.display = "none";
+  } else {document.getElementById("customInstrument").style.display = "block";
+  myHobby.customInstrument = document.getElementById("customInstrument").value
+  }*/
+}
+
+function handleCustomInstrumentChange() {
+  /*if (myHobby.instrumentslist == "other") {*/
+    myHobby.customInstrument = document.getElementById("customInstrument").value;
+/*}*/
+
+}
+
+/*
+} 
+
+
+function handleCustomLangChange() {
+  if (myBook.language == "other") {
+    myBook.customLanguage = document.getElementById("customlanguage").value;
+  }
+
+} */
+
+//checkboxes!
+
+function handleOwnInstrumentsChange() {
+  myHobby.ownInstruments = document.getElementById ("qty-instruments").value;
+}
+
+function handleFirstInstrumentChange() {
+  myHobby.firstInstrument = document.getElementById ("first-instrument").value;
+}
+
+function handleYearsPlayingChange() {
+  myHobby.yearsInstrument = document.getElementById ("how-long").value;
+}
+
+function handleMusicClassesChange(e) {
+  myHobby.musicClasses = e.target.value;
+}
+//onchange
+
+function handleHowToVidsChange(e) {
+  myHobby.howToVideos = e.target.value;
+}
+//onchange
+
+function handlePracticeChange(e) {
+  myHobby.practice = e.target.value;
+}
+//onchange
+
+function handlePerformanceChange(e) {
+  myHobby.performance = e.target.value;
+}
+
+//onchange
+
+function handleSongwritingChange(e) {
+  myHobby.songwriting = e.target.value;
+}
+
+//onchange
+
+function handleFamilyChange(e) {
+  myHobby.family = e.target.value;
+}
+//onchange
+/*
+var handleTop3ArtistsChange_object = new Object();
+function handleTop3ArtistsChange(e) {
+  if (e.value != "") {
+    handleTop3ArtistsChange_object[e.getAttribute("id")] = e.value;
+  }
+}
+*/
+
+function handleTop3ArtistsChange(e) {
+  var value = e.target.value;
+  if (e.target.value != "") {
+    myHobby.top3Artists = myHobby.top3Artists + "," + value;
+  }
+}
+/*
+
+function handleTop3ArtistsChange() {
+  myHobby.top3Artists = document.getElementsByClassName ("top3").value; console.log(e.target.value, e.target.id)
+}
+
+function handleTop3ArtistsChange(e) {
+  if (e.target.checked){
+     myHobby.top3Artists.push (e.target.value);
+  } else {
+    myHobby.top3Artists.splice (myHobby.top3Artists.indexOf(e.target.value),1);
+  }
+}
+*/
+//multiple input boxes
+
+function handleGenreChange(e) {
+  myHobby.genre = e.target.value;
+}
+//dropdown
+
+function handleEarwormChange() {
+  myHobby.earworm = document.getElementById ("earworm").value;
+}
+
+function handleListenHoursChange(e) {
+  myHobby.listenHours = e.target.value;
+}
+//dropdown
+
+function handleProviderChange(e) {
+  var value = e.target.value;
+  if (e.target.checked == true) {
+    myHobby.provider = myHobby.provider + "," + value;
+  }
+}
+//checkbox
+
+function handleAlbumsChange(e) {
+  myHobby.albums = e.target.value;
+}
+
+function handleMemorableConcertChange () {
+  myHobby.memorableConcert = document.getElementById ("concert-memo").value;
+}
+
+function handleDreamConcertChange () {
+  myHobby.dreamConcert = document.getElementById ("dream-concert").value;
+}
+
+function handleDreamArtistChange () {
+  myHobby.dreamArtist = document.getElementById ("dream-artist").value;
+}
+
+/*____________________________________________SERVER & ADMIN PART____________________________________________*/
 var loadedData = [];
 
 function loadEditBookItem() {

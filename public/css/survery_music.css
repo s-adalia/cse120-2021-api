@@ -1,0 +1,48 @@
+body {
+  font-family: "Work Sans", sans-serif;
+  font-size: 18px;
+  margin: auto;
+  margin-top:30px;
+  margin-bottom: 30px;
+  width: 50%;
+  border-style:solid;
+  border-color:	#982c0a; 
+  border-radius:10px;
+  background-color: #Fbecdc;
+  padding:50px;
+  
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+.divider {
+  border-bottom: 2px dotted #982c0a;
+  margin-bottom: 20px;
+
+}
+
+.question {
+  border-bottom: 2px solid #982c0a;
+  margin-bottom: 10px;
+
+}
+
+.peanuts {
+  width:50%;
+  height:auto;
+  margin:auto;
+}
+
+fieldset {
+  border-color: #fa9e6a;
+  border-radius:10px;
+}
+
+#fav_artists label {
+  min-width: 30px;
+  display: inline-block;
+}
+
