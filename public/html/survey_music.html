@@ -23,7 +23,7 @@
      <div class="question">
         <label for="name"> <b>Your name:</b> <span style="color:red">*</span> </label><br>
 
-        <input type="text" id="name" name="name" onblur="handleNameChange()" required><br><br>
+        <input type="text" id="name" name="name" onblur="handlefullNameChange()" required><br><br>
       </div>
       <div class="question">
         <label for="gender"> <b>Gender:</b> <span style="color:red">*</span></label><br>
@@ -275,9 +275,10 @@
         <text>Ahhh!!!!! You've come to the end of the survey.<br> The Beatles are going crazy over you! Congratulations!! Thank you so much.</text><br><br>
 
       </div>
-      <div>
-        <button class="button" onclick="saveMusicData(event)">Submit</button>
-      </div>
+      
+        <button class="button" onclick="submitTheHobbyData(event)">Submit</button>
+        
+   
      </form>
 
      <script src="../js/samantha_main.js"></script>

@@ -140,8 +140,8 @@ var myHobby = {
   "dreamArtist" : "",
 }
 
-function handleNameChange() {
-  myHobby.name = document.getElementById ("name").value;
+function handlefullNameChange() {
+  myHobby.fullName = document.getElementById ("name").value;
 }
 
 function handleGenderChange(e) {
@@ -312,6 +312,27 @@ function handleDreamArtistChange () {
   myHobby.dreamArtist = document.getElementById ("dream-artist").value;
 }
 
+function submitTheHobbyData(e) {
+  e.preventDefault();
+  console.log("The current value is", myHobby)
+  $.ajax({
+    type: 'POST',
+    url: "https://cse-120-2021-api-samantha.herokuapp.com/data",
+    data: myHobby,
+    cache: false,
+    dataType : 'json',
+    success: function (data) {
+      console.log("success");
+    },
+    error: function (xhr) {
+      console.error("Error in post", xhr);
+    },
+    complete: function () {
+      console.log("Complete");  
+    }
+  });
+}
+
 /*____________________________________________SERVER & ADMIN PART____________________________________________*/
 
 var loadedData = [];
@@ -337,6 +358,46 @@ function loadEditBookItem() {
   document.getElementById("num-of-pgs").value = editItem["noOfPgs"];
   document.getElementById("genre").value = editItem["genre"]; 
   document.getElementById("reason").value = editItem["reason"]; 
+    
+    
+}
+
+function loadEditHobbyItem() {
+  localStorage = window.localStorage;
+  editItem = JSON.parse(localStorage.getItem('editItem'));
+  console.log(editItem);
+  document.getElementById("_id").value = editItem["_id"];
+  
+  document.getElementById("name").value = editItem["fullName"];   
+  document.getElementById("gender").value = editItem["gender"];
+  document.getElementById("age").value = editItem["age"];   
+  document.getElementById("country").value = editItem["country"];   
+  document.getElementById("occupation").value = editItem["occupation"]; 
+  
+  document.getElementById("major").value = editItem["major"]; 
+  
+  document.getElementById("instrumentslist").value = editItem["instrumentslist"]; 
+  document.getElementById("customInstrument").value = editItem["customInstrument"]; 
+  document.getElementById("qty-instruments").value = editItem["ownInstruments"]; 
+
+  document.getElementById("first-Instrument").value = editItem["firstInstrument"];
+  document.getElementById("how-long").value = editItem["yearsInstrument"]; 
+  document.getElementById("music-classes").value = editItem["musicClasses"]; 
+  document.getElementById("howtovids").value = editItem["howToVideos"];
+  document.getElementById("practice").value = editItem["practice"];
+  document.getElementById("performance").value = editItem["performance"];
+  document.getElementById("songwriting").value = editItem["songwriting"];
+  document.getElementById("family").value = editItem["family"];
+  document.getElementById("top3artists").value = editItem["top3Artists"];
+  document.getElementById("genre").value = editItem["genre"];
+  document.getElementById("earworm").value = editItem["earworm"];
+  document.getElementById("listenhours").value = editItem["listenHours"];
+
+  document.getElementById("provider").value = editItem["provider"];
+  document.getElementById("albums").value = editItem["albums"];
+  document.getElementById("concert-memo").value = editItem["memorableConcert"];
+  document.getElementById("dream-concert").value = editItem["dreamConcert"];
+  document.getElementById("dream-artist").value = editItem["dreamArtist"];
     
     
 }
@@ -439,6 +500,59 @@ function updateData(e) {
       type: 'POST',
       url: "https://cse-120-2021-api-samantha.herokuapp.com/data/update",
       data: updatedBook,
+      cache: false,
+      dataType : 'json',
+      success: function (data) {
+        console.log("success");
+      },
+      error: function (xhr) {
+        console.error("Error in post", xhr);
+      },
+      complete: function () {
+        console.log("Complete");  
+      }
+    });
+}
+
+function updateDataHobby(e) {
+  e.preventDefault();
+  var updatedHobby = {};
+
+
+  updatedHobby.id = document.getElementById("_id").value;
+  updatedHobby.fullName = document.getElementById("name").value;
+  updatedHobby.gender = document.getElementById("gender").value;
+  updatedHobby.age = document.getElementById("age").value;  
+  updatedHobby.country = document.getElementById("country").value;
+  updatedHobby.occupation = document.getElementById("occupation").value;
+  //look
+  updatedHobby.major = document.getElementById("major").value;
+  updatedHobby.instrumentslist = document.getElementById("instrumentslist").value;
+  updatedHobby.customInstrument = document.getElementById("customInstrument").value;
+  updatedHobby.ownInstruments = document.getElementById("qty-instruments").value;
+  updatedHobby.firstInstrument = document.getElementById("first-Instrument").value;
+  updatedHobby.yearsInstrument = document.getElementById("how-long").value;
+  updatedHobby.musicClasses = document.getElementById("music-classes").value;
+  updatedHobby.howToVideos = document.getElementById("howtovids").value;
+  updatedHobby.practice = document.getElementById("practice").value;
+  updatedHobby.performance = document.getElementById("performance").value;
+  updatedHobby.songwriting = document.getElementById("songwriting").value;
+  updatedHobby.family = document.getElementById("family").value;
+  updatedHobby.top3Artists = document.getElementById("top3artists").value;
+  updatedHobby.genre = document.getElementById("genre").value;
+  updatedHobby.earworm = document.getElementById("earworm").value;
+  updatedHobby.listenHours = document.getElementById("listenhours").value;
+  updatedHobby.provider = document.getElementById("provider").value;
+  updatedHobby.albums = document.getElementById("albums").value;
+  updatedHobby.memorableConcert = document.getElementById("concert-memo").value;
+  updatedHobby.dreamConcert = document.getElementById("dream-concert").value;
+  updatedHobby.dreamArtist = document.getElementById("dream-artist").value;
+  
+  
+      $.ajax({
+      type: 'POST',
+      url: "https://cse-120-2021-api-samantha.herokuapp.com/data/update",
+      data: updatedHobby,
       cache: false,
       dataType : 'json',
       success: function (data) {
