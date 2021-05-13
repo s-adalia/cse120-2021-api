@@ -130,7 +130,7 @@ var myHobby = {
   "songwriting" : "",
   "family" : "",
   "top3Artists" : "",
-  "genre" : "",
+  "genre2" : "",
   "earworm" : "",
   "listenHours" : "",
   "provider" : "",
@@ -274,8 +274,8 @@ function handleTop3ArtistsChange(e) {
 */
 //multiple input boxes
 
-function handleGenreChange(e) {
-  myHobby.genre = e.target.value;
+function handleGenre2Change(e) {
+  myHobby.genre2 = e.target.value;
 }
 //dropdown
 
@@ -389,7 +389,7 @@ function loadEditHobbyItem() {
   document.getElementById("songwriting").value = editItem["songwriting"];
   document.getElementById("family").value = editItem["family"];
   document.getElementById("top3artists").value = editItem["top3Artists"];
-  document.getElementById("genre").value = editItem["genre"];
+  document.getElementById("genre-dropdown").value = editItem["genre2"];
   document.getElementById("earworm").value = editItem["earworm"];
   document.getElementById("listenhours").value = editItem["listenHours"];
 
@@ -539,7 +539,7 @@ function updateDataHobby(e) {
   updatedHobby.songwriting = document.getElementById("songwriting").value;
   updatedHobby.family = document.getElementById("family").value;
   updatedHobby.top3Artists = document.getElementById("top3artists").value;
-  updatedHobby.genre = document.getElementById("genre").value;
+  updatedHobby.genre2 = document.getElementById("genre-dropdown").value;
   updatedHobby.earworm = document.getElementById("earworm").value;
   updatedHobby.listenHours = document.getElementById("listenhours").value;
   updatedHobby.provider = document.getElementById("provider").value;
