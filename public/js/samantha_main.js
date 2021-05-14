@@ -92,12 +92,14 @@ function submitTheBookData(e) {
     dataType : 'json',
     success: function (data) {
       console.log("success");
+
     },
     error: function (xhr) {
       console.error("Error in post", xhr);
     },
     complete: function () {
       console.log("Complete");  
+      document.location = "thank_you_books.html"
     }
   });
 }
@@ -329,6 +331,7 @@ function submitTheHobbyData(e) {
     },
     complete: function () {
       console.log("Complete");  
+      document.location = "thank_you_music.html"
     }
   });
 }
@@ -502,7 +505,8 @@ function updateData(e) {
       data: updatedBook,
       cache: false,
       dataType : 'json',
-      success: function (data) {
+      success: function (data) { 
+        //location.href = localStorage.getItem('prev-page-url');
         console.log("success");
       },
       error: function (xhr) {
@@ -513,6 +517,8 @@ function updateData(e) {
       }
     });
 }
+
+
 
 function updateDataHobby(e) {
   e.preventDefault();
